@@ -1,0 +1,13 @@
+package com.easternhealthconnect.test;
+
+import java.lang.Number;
+
+rule "breast_CurrentCancerCheck"
+	dialect "mvel"
+	when
+		p : Person( current_Cancer contains "Breast Cancer" , screening_Program == "Breast" )
+	then
+		p.addReasonToList( "Breast Cancer" );
+		p.setIsEligible( false );
+		p.setReason_For_Ineligibility( "Breast Cancer" );
+end

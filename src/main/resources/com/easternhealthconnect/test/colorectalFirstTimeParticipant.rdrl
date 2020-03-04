@@ -1,0 +1,13 @@
+package com.easternhealthconnect.test;
+
+import java.lang.Number;
+
+rule "colorectalFirstTimeParticipant"
+	dialect "mvel"
+	when
+		p : Person( age >= 50 && age <= 74 && MCP_Number != null && mcp_Expiration_Date > ( DateHelper.getToday() ) && ( co_morbities == false || co_morbities == null )&& history_Of_Cancer excludes "Colorectal Cancer" && ( last_Colonoscopy_Result == null || last_Colonoscopy_Result == "N/A" || ( last_Colonoscopy_Result != "N/A" && last_Colonoscopy_Result != null && last_Colonoscopy_Result_Date >= ( DateHelper.addYears(-5) ) ))&& ( family_History_Of_Cancer excludes "Colorectal Cancer" || ( family_History_Of_Cancer contains "Colorectal Cancer" && fdr_Less_60_Years == false ))&& screening_Program == "Colorectal" && program_Cohort == "First Time" )
+	then
+		modify( p ) {
+				setIsEligible( true )
+		}
+end

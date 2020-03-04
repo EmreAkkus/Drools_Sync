@@ -1,0 +1,13 @@
+package com.easternhealthconnect.test;
+
+import java.lang.Number;
+
+rule "colorectalFiveYearRecall"
+	dialect "mvel"
+	when
+		p : Person( age >= 50 && age <= 74 && MCP_Number != null && mcp_Expiration_Date > ( DateHelper.getToday() ) && last_FIT_Result == "Positive" && last_Colonoscopy_Result == "Negative" && last_Colonoscopy_Result_Date <= ( DateHelper.addYears(-5) ) && last_CT_Colonography_Result == "Negative" && last_CT_Colonography_Result_Date <= ( DateHelper.addYears(-5) ) && screening_Program == "Colorectal" && status != "Self Withdrawal" && status != "Discharge" && program_Cohort == "Recall" )
+	then
+		modify( p ) {
+				setIsEligible( true )
+		}
+end

@@ -1,0 +1,45 @@
+<org.drools.core.rule.KieModuleMetaInfo>
+  <typeMetaInfos>
+    <entry>
+      <string>com.easternhealthconnect.test.Person</string>
+      <org.drools.core.rule.TypeMetaInfo>
+        <kind>CLASS</kind>
+        <role>FACT</role>
+        <isDeclaredType>false</isDeclaredType>
+      </org.drools.core.rule.TypeMetaInfo>
+    </entry>
+  </typeMetaInfos>
+  <rulesByPackage>
+    <entry>
+      <string>com.easternhealthconnect.test</string>
+      <set>
+        <string>colorectal_FITTestDateCheck</string>
+        <string>cervical_MCPCheck</string>
+        <string>cervical_HistoryOfCancerCheck</string>
+        <string>colorectalSecondYearRecall</string>
+        <string>cervical_AgeCheck</string>
+        <string> breast_CurrentBreastProblemCheck</string>
+        <string>colorectal_MCPCheck</string>
+        <string>breastTwoYearRecall</string>
+        <string>DateOfDeathCheck</string>
+        <string>breast_ImplantsCheck</string>
+        <string>breast_CurrentCancerCheck</string>
+        <string>breast_GenderCheck</string>
+        <string>cervicalThreeYearRecall</string>
+        <string>colorectal_TestDateCheck</string>
+        <string>breast_ReasonIneligibleAgeCheck</string>
+        <string>cervical_GenderCheck</string>
+        <string>breast_MCPCheck</string>
+        <string>colorectalFirstTimeParticipant</string>
+        <string>cervicalFirstYearRecall</string>
+        <string>colorectal_CurrentCancerCheck</string>
+        <string>breastOneYearRecall</string>
+        <string>colorectal_AgeCheck</string>
+        <string>colorectal_FDR_Less_60_Year</string>
+        <string>colorectalFiveYearRecall</string>
+        <string>cervicalFirstTimeParticipant</string>
+        <string>breastFirstTimeParticipant</string>
+      </set>
+    </entry>
+  </rulesByPackage>
+</org.drools.core.rule.KieModuleMetaInfo>

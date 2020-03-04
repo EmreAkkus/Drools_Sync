@@ -1,0 +1,12 @@
+package com.easternhealthconnect.test;
+
+import java.lang.Number;
+
+rule "DateOfDeathCheck"
+	dialect "mvel"
+	when
+		p : Person( date_Of_Death != null )
+	then
+		p.setIsEligible( false );
+		p.setReason_For_Ineligibility( "Date Of Death" );
+end

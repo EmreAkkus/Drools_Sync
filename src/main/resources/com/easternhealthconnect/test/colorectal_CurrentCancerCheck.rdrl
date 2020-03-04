@@ -1,0 +1,13 @@
+package com.easternhealthconnect.test;
+
+import java.lang.Number;
+
+rule "colorectal_CurrentCancerCheck"
+	dialect "mvel"
+	when
+		p : Person( current_Cancer contains "Colorectal Cancer" , screening_Program == "Colorectal" )
+	then
+		p.setReason_For_Ineligibility( "Colorectal Cancer" );
+		p.setIsEligible( false );
+		p.addReasonToList( "Colorectal Cancer" );
+end

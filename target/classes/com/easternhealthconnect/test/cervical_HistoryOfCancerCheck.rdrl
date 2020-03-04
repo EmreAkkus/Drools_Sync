@@ -1,0 +1,13 @@
+package com.easternhealthconnect.test;
+
+import java.lang.Number;
+
+rule "cervical_HistoryOfCancerCheck"
+	dialect "mvel"
+	when
+		p : Person( history_Of_Cancer == "Cervical or Endometrial Cancer" , screening_Program == "Cervical" )
+	then
+		p.setIsEligible( false );
+		p.setReason_For_Ineligibility( "History Of Cancer" );
+		p.addReasonToList( "History Of Cancer" );
+end

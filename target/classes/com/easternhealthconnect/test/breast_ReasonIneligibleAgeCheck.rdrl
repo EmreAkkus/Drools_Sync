@@ -1,0 +1,13 @@
+package com.easternhealthconnect.test;
+
+import java.lang.Number;
+
+rule "breast_ReasonIneligibleAgeCheck"
+	dialect "mvel"
+	when
+		p : Person( screening_Program == "Breast" , age < 50 || age > 75 )
+	then
+		p.addReasonToList( "Age" );
+		p.setIsEligible( false );
+		p.setReason_For_Ineligibility( "Age" );
+end

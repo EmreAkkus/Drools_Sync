@@ -1,0 +1,13 @@
+package com.easternhealthconnect.test;
+
+import java.lang.Number;
+
+rule "breast_MCPCheck"
+	dialect "mvel"
+	when
+		p : Person( screening_Program == "Breast" && ( mcp_Expiration_Date < ( DateHelper.getToday() ) || MCP_Number == null || mcp_Expiration_Date == null ))
+	then
+		p.addReasonToList( "Invalid MCP" );
+		p.setIsEligible( false );
+		p.setReason_For_Ineligibility( "Invalid MCP" );
+end

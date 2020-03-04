@@ -1,0 +1,13 @@
+package com.easternhealthconnect.test;
+
+import java.lang.Number;
+
+rule "colorectal_FDR_Less_60_Year"
+	dialect "mvel"
+	when
+		p : Person( screening_Program == "Colorectal" , fdr_Less_60_Years == true )
+	then
+		p.setReason_For_Ineligibility( "FDR <60 years old" );
+		p.setIsEligible( false );
+		p.addReasonToList( "FDR <60 years old" );
+end

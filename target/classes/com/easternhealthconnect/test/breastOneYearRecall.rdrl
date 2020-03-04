@@ -1,0 +1,14 @@
+package com.easternhealthconnect.test;
+
+import java.lang.Number;
+
+rule "breastOneYearRecall"
+	dialect "mvel"
+	when
+		p : Person( age <= 75 && age >= 50 && ( gender == "F" || gender == "Female" )&& ( implants == false || implants == null )&& MCP_Number != null && mcp_Expiration_Date > ( DateHelper.getToday() ) && ( history_Of_Cancer excludes "Breast Cancer" && history_Of_Cancer contains "Cervical or Endometrial Cancer" )&& family_History_Of_Cancer contains "Breast Cancer" && mammogram_Breast_Density >= 75 && mammogram == "Normal" && mammogram_Date < ( DateHelper.addMonths(-12) ) && screening_Program == "Breast" && status != "Self Withdrawal" && status != "Discharge" )
+	then
+		modify( p ) {
+				setIsEligible( true ), 
+				setProgram_Cohort( "1 Year Recall" )
+		}
+end

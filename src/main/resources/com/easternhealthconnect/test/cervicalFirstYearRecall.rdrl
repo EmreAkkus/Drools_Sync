@@ -1,0 +1,13 @@
+package com.easternhealthconnect.test;
+
+import java.lang.Number;
+
+rule "cervicalFirstYearRecall"
+	dialect "mvel"
+	when
+		p : Person( age >= 21 && age <= 69 && gender == "Female" && MCP_Number != null && mcp_Expiration_Date > ( DateHelper.getToday() ) && history_Of_Cancer excludes "Cervical or Endometrial Cancer" && ( latest_HPV_Status == "Positive" || latest_HPV_Status == "Unknown" )&& last_Cytology_Result == "Negative" && last_Cytology_Date < ( DateHelper.addYears(-3) ) && screening_Program == "Cervical" && status != "Self Withdrawal" && status != "Discharge" && screening_Program == "Recall" )
+	then
+		modify( p ) {
+				setIsEligible( true )
+		}
+end

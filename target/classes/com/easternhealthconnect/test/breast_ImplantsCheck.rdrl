@@ -1,0 +1,13 @@
+package com.easternhealthconnect.test;
+
+import java.lang.Number;
+
+rule "breast_ImplantsCheck"
+	dialect "mvel"
+	when
+		p : Person( implants == true , screening_Program == "Breast" )
+	then
+		p.addReasonToList( "Implants" );
+		p.setIsEligible( false );
+		p.setReason_For_Ineligibility( "Implants" );
+end

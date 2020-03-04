@@ -1,0 +1,13 @@
+package com.easternhealthconnect.test;
+
+import java.lang.Number;
+
+rule "colorectal_TestDateCheck"
+	dialect "mvel"
+	when
+		p : Person( screening_Program == "Colorectal" , last_Colonoscopy_Result != null , last_Colonoscopy_Result_Date < ( DateHelper.addYears(-5) ) )
+	then
+		p.setReason_For_Ineligibility( "Test Date" );
+		p.setIsEligible( false );
+		p.addReasonToList( "Test Date" );
+end

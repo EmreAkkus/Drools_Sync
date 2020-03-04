@@ -1,0 +1,13 @@
+package com.easternhealthconnect.test;
+
+import java.lang.Number;
+
+rule "colorectalSecondYearRecall"
+	dialect "mvel"
+	when
+		p : Person( age >= 50 && age <= 74 && MCP_Number != null && mcp_Expiration_Date > ( DateHelper.getToday() ) && ( status != "Self Withdrawal" && status != "Discharge" )&& last_FIT_Result == "Negative" && last_FIT_result_date <= ( DateHelper.addYears(-2) ) && screening_Program == "Colorectal" && screening_Program == "Recall" )
+	then
+		modify( p ) {
+				setIsEligible( true )
+		}
+end

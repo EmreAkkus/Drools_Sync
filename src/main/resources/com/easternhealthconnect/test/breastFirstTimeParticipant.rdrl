@@ -1,0 +1,15 @@
+package com.easternhealthconnect.test;
+
+import java.lang.Number;
+import java.util.Date;
+
+rule "breastFirstTimeParticipant"
+	dialect "mvel"
+	when
+		p : Person( age > 50 && age < 75 && ( gender == "F" || gender == "Female" )&& ( implants == false || implants == null )&& MCP_Number != null && mcp_Expiration_Date > ( DateHelper.getToday() ) && history_Of_Cancer excludes "Breast Cancer" && ( current_Breast_Problem == false || current_Breast_Problem == null )&& ( breast_Biopsy == null || breast_Biopsy == "N/A" || ( breast_Biopsy != null && breast_Biopsy != "N/A" && breast_Biopsy_Date < ( DateHelper.get6MonthsBefore() ) ))&& screening_Program == "Breast" && ( mammogram == null || ( mammogram != null && mammogram_Date < ( DateHelper.get6MonthsBefore() ) )))
+	then
+		modify( p ) {
+				setIsEligible( true ), 
+				setProgram_Cohort( "First Time Participant" )
+		}
+end

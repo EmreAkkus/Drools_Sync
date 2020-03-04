@@ -1,0 +1,13 @@
+package com.easternhealthconnect.test;
+
+import java.lang.Number;
+
+rule "colorectal_MCPCheck"
+	dialect "mvel"
+	when
+		p : Person( screening_Program == "Colorectal" && ( MCP_Number == null || mcp_Expiration_Date < ( DateHelper.getToday() ) ))
+	then
+		p.setReason_For_Ineligibility( "Invalid MCP" );
+		p.setIsEligible( false );
+		p.addReasonToList( "Invalid MCP" );
+end

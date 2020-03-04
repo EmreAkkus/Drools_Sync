@@ -1,0 +1,13 @@
+package com.easternhealthconnect.test;
+
+import java.lang.Number;
+
+rule "colorectal_AgeCheck"
+	dialect "mvel"
+	when
+		p : Person( screening_Program == "Colorectal" , age < 50 || age > 74 )
+	then
+		p.setReason_For_Ineligibility( "Age" );
+		p.setIsEligible( false );
+		p.addReasonToList( "Age" );
+end

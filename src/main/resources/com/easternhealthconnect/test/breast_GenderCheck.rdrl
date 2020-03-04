@@ -1,0 +1,13 @@
+package com.easternhealthconnect.test;
+
+import java.lang.Number;
+
+rule "breast_GenderCheck"
+	dialect "mvel"
+	when
+		p : Person( gender != "Female" , screening_Program == "Breast" , gender != "F" )
+	then
+		p.addReasonToList( "Gender" );
+		p.setIsEligible( false );
+		p.setReason_For_Ineligibility( "Gender" );
+end

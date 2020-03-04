@@ -1,0 +1,13 @@
+package com.easternhealthconnect.test;
+
+import java.lang.Number;
+
+rule "colorectal_FITTestDateCheck"
+	dialect "mvel"
+	when
+		p : Person( screening_Program == "Colorectal" , last_FIT_result_date < ( DateHelper.addYears(-2) ) )
+	then
+		p.setReason_For_Ineligibility( "FIT Date" );
+		p.setIsEligible( false );
+		p.addReasonToList( "FIT Date" );
+end

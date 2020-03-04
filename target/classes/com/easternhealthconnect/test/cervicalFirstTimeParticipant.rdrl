@@ -1,0 +1,13 @@
+package com.easternhealthconnect.test;
+
+import java.lang.Number;
+
+rule "cervicalFirstTimeParticipant"
+	dialect "mvel"
+	when
+		p : Person( screening_Program == "Cervical" && age >= 21 && age <= 69 && gender == "Female" && MCP_Number != null && mcp_Expiration_Date > ( DateHelper.getToday() ) && history_Of_Cancer excludes "Cervical or Endometrial Cancer" && latest_HPV_Status == null && last_Colonoscopy_Result == null && last_Colonoscopy_Result_Date == null && screening_Program == "First Time" )
+	then
+		modify( p ) {
+				setIsEligible( true )
+		}
+end

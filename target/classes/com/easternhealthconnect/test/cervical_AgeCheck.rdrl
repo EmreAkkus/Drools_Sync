@@ -1,0 +1,13 @@
+package com.easternhealthconnect.test;
+
+import java.lang.Number;
+
+rule "cervical_AgeCheck"
+	dialect "mvel"
+	when
+		p : Person( screening_Program == "Cervical" , age < 21 || age > 69 )
+	then
+		p.setReason_For_Ineligibility( "Age" );
+		p.setIsEligible( false );
+		p.addReasonToList( "Age" );
+end
